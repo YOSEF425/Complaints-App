@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annonymous complaint</title>
+</head>
+<body>
+    <form action="/submit" method="post">
+     <label for="complaint">Choose type of complaint:</label>
+       <select id="complaint" name="complaint">
+          <option value="Food">Food</option>
+          <option value="Equipment">Equipment</option>
+          <option value="Commands">Commands</option>
+       </select>
+        <br><br>
+         <textarea id="details" name="details" rows="4" cols="50" placeholder="Describe complaint here"></textarea>
+         <button type="submit">send</button>
+    </form>
+</body>
+</html>

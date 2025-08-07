@@ -1,0 +1,18 @@
+h1{
+    font-size: xx-large;
+    background-color: blanchedalmond;
+    text-align: center;
+}
+body{
+    background-color: blanchedalmond;
+}
+#describtion{
+    width: 250px;
+    height: 250px;
+    font-size: large;
+    background-color: mediumorchid;
+    padding: 20px;
+    text-align: center;
+    
+}
+
