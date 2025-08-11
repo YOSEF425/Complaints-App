@@ -1,22 +1,14 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
+import { connectToMongoDB } from './mongoDB/database';
 import dotenv from 'dotenv';
-
 dotenv.config();
 
-const client = new MongoClient(process.env.MONGO_URL);
-let complaintsColl;
+const MONGO_COMMANDER_PASSWORD = "123454321"
 
-async function connectToMongoDB() {
-  try {
-    await client.connect();
-    const db = client.db(process.env.DB_NAME);
-    complaintsColl = db.collection('complaints'); 
-    console.log('Connected to MongoDB');
-  } catch (err) {
-    console.error('MongoDB connection error:', err);
-  }
-}
+const client = new MongoClient(process.env.MONGO_URL);
+
+let complaintsColl;
 
 connectToMongoDB();
 
@@ -37,8 +29,7 @@ app.post('/submit',async(req,res) => {
     timestamp: new Date() 
     };
 
-
-  try {
+   try {
     const result = await complaintsColl.insertOne(complaintDoc);
     res.status(201).json({
       message: 'Complaint submitted successfully.',
@@ -46,6 +37,21 @@ app.post('/submit',async(req,res) => {
   } catch (err) {
     console.error('Error submitting complaint:', err);
     res.status(500).json({ message: 'Failed to submit complaint.' });
+  }
+
+})
+
+app.post('/submit-password',async(req,res) => {
+   const password = req.body;
+
+    if (password !== MONGO_COMMANDER_PASSWORD) {
+    return res.status(401).send('Unauthorized: Incorrect password');
+  }
+  try {
+    const complaints = await complaintsColl.find({}).toArray();
+    res.send(`<pre>${JSON.stringify(complaints, null, 2)}</pre>`);
+  } catch (error) {
+    res.status(500).send('Internal Server Error');
   }
 
 })
