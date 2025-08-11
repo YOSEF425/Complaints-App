@@ -12,7 +12,12 @@ body{
     font-size: large;
     background-color: mediumorchid;
     padding: 20px;
-    text-align: center;
+    margin-left: 600px;
     
+}
+
+#linkToComplain{
+        margin-left: 600px;
+
 }
 
